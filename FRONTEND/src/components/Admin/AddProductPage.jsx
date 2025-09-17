@@ -193,7 +193,7 @@ const AddProductPage = () => {
                 sku: "",
                 sizes: [],
                 colors: [],
-                materials: [],
+                material: [],
                 images: [],
                 user: user.id,
               })
@@ -311,13 +311,13 @@ const AddProductPage = () => {
                 onClick={() =>
                   setProductDetails((prev) => ({
                     ...prev,
-                    materials: prev.materials.includes(m)
-                      ? prev.materials.filter((mat) => mat !== m)
-                      : [...prev.materials, m],
+                    material: prev.material.includes(m)
+                      ? prev.material.filter((mat) => mat !== m)
+                      : [...prev.material, m],
                   }))
                 }
                 className={`border px-2 py-1 cursor-pointer ${
-                  productDetails.materials.includes(m)
+                  productDetails.material.includes(m)
                     ? "bg-blue-500 text-white"
                     : "bg-white"
                 }`}

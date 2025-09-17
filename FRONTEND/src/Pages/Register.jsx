@@ -38,10 +38,6 @@ const handleSubmit = (e)=>{
     e.preventDefault();
     let name = firstName + " " + lastName
     dispatch(registerUser({ name, email, password}))
-    console.log({
-        email: email,
-        password: password
-    });
 }
 
  useEffect(() => {
