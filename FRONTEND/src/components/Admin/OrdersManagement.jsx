@@ -4,6 +4,8 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchAllOrders, updateOrderStatus } from "../../redux/slices/adminOrderSlice";
+import LoadingSpinner from "../Common/LoadingSpinner";
+import ErrorMessage from "../Common/ErrorMessage";
 const OrdersManagement = () => {  
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,6 +24,18 @@ const OrdersManagement = () => {
     }
   } 
 
+  const gotToOrder = (e, id) =>{
+    e.stopPropagation();
+    navigate(`/order/${id}`)
+  }
+ const handleStatusUpdate = (e, orderId) => {
+   e.stopPropagation();
+   dispatch(updateOrderStatus({ id: orderId, status: e.target.value }));
+ };
+
+
+  if(loading) return <LoadingSpinner/>
+  if(error) return <ErrorMessage/>
 
   return (
     <div>
@@ -51,11 +65,13 @@ const OrdersManagement = () => {
             {orders.length > 0 ? (
               orders.map((order) => (
                 <tr
-                  onClick={()=>navigate(`/order/${order._id}`)}
                   key={order._id}
                   className="hover:bg-slate-100 cursor-pointer"
                 >
-                  <td className="px-4 py-1 text-sm text-slate-700 border-b border-b-slate-200">
+                  <td
+                    onClick={(e) => gotToOrder(e, order._id)}
+                    className="px-4 py-1 text-sm text-slate-700 border-b border-b-slate-200"
+                  >
                     {order._id}
                   </td>
                   <td className="px-4 py-1 text-sm text-slate-700 border-b border-b-slate-200">
@@ -68,18 +84,13 @@ const OrdersManagement = () => {
                     <select
                       name="status"
                       value={order.status}
-                      onChange={(e) =>
-                        dispatch(
-                          updateOrderStatus({
-                            id: order._id,
-                            status: e.target.value,
-                          })
-                        )
-                      }
-                      className={`border border-slate-200 px-2 py-1  bg-${getStatusColor(order.status)}-200`}
+                      onChange={(e) => {
+                        handleStatusUpdate(e, order._id);
+                      }}
+                      className={`border border-slate-200 px-2 py-1`}
                       style={{
+                        backgroundColor: `${getStatusColor(order.status)}20`, // 20 = light bg
                         color: getStatusColor(order.status),
-                      
                       }}
                     >
                       <option value="delivered">delivered</option>
@@ -91,14 +102,15 @@ const OrdersManagement = () => {
                   </td>
                   <td className="px-4 py-1 text-sm text-slate-700 border-b border-b-slate-200">
                     <button
-                      onClick={() =>
+                      onClick={(e) => {
+                        e.stopPropagation();
                         dispatch(
                           updateOrderStatus({
                             id: order._id,
                             status: "delivered",
                           })
-                        )
-                      }
+                        );
+                      }}
                       className="bg-green-500 text-white text-nowrap p-1"
                     >
                       mark as delivered
@@ -109,7 +121,7 @@ const OrdersManagement = () => {
             ) : (
               <tr>
                 <td
-                  colSpan={4}
+                  colSpan={5}
                   className="animate-pulse text-center text-red-600 py-3 capitalize"
                 >
                   no orders added . . .
