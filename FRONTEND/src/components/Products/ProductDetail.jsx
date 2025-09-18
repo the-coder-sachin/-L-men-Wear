@@ -32,9 +32,10 @@ const ProductDetail = ({ productId }) => {
   const [isAddingToBag, setIsAddingToBag] = useState(false);
 
   const fetchProductId = productId || id;
-    useEffect(() => {
+   
+  useEffect(() => {
       window.scrollTo(0, 0);
-    }, [fetchProductId]);
+    }, [fetchProductId, id]);
 
   useEffect(() => {
     if (fetchProductId) {
