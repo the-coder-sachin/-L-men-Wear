@@ -5,6 +5,7 @@ import { fetchProductDetails } from "../../redux/slices/productSlice";
 import { updateProduct } from "../../redux/slices/adminProductSlice";
 import axios from "axios";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import { toast } from "sonner";
 
 
   const genderOptions = ["men", "women", "unisex"];
@@ -127,14 +128,19 @@ const ProductEditPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(productDetails);
-      
-      await dispatch(
+      const res = await dispatch(
         updateProduct({ id, productData: productDetails })
-      ).unwrap();
-      navigate("/admin/products");
+      )
+      
+      if (res.payload && res.meta.requestStatus === "fulfilled") {
+        toast.success("Product updated successfully!");
+        navigate("/admin/products");
+      } else {
+        toast.error("Product update failed.");
+      }
     } catch (err) {
       console.error("Update failed:", err);
+      toast.error("Something went wrong during update.");
     }
   };
 

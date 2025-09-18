@@ -111,7 +111,6 @@ const adminProductSlice = createSlice({
       })
       .addCase(createProduct.rejected, (state, action) => {
         console.log(action.payload);
-        ;
       })
 
       // update
@@ -123,7 +122,9 @@ const adminProductSlice = createSlice({
           state.products[index] = action.payload;
         }
       })
-
+      .addCase(updateProduct.rejected, (state, action) => {
+        state.error = action.payload?.message || "Failed to update product";
+      })
       // delete
       .addCase(deleteProduct.fulfilled, (state, action) => {
         state.products = state.products.filter(
