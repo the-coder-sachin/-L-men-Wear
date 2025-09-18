@@ -11,7 +11,10 @@ const FeatureSection = () => {
           autoPlay
           muted
           loop
-          className="h-full w-full object-cover"
+          playsInline
+          disablePictureInPicture
+          controls={false}
+          className="h-full select-none w-full object-cover"
         ></video>
 
         {/* Overlay */}
