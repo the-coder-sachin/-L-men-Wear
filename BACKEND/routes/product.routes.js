@@ -264,7 +264,7 @@ router.get("/best-seller", async(req, res)=>{
 
 router.get("/new-arrivals", async(req, res)=>{
   try {
-    const newArrivals = await Product.find().sort({createdAt: -1}).limit(4)
+    const newArrivals = await Product.find().sort({createdAt: -1}).limit(10)
     if (!newArrivals || newArrivals.length === 0) {
      return res.status(404).json({ message: "no products found" });
     }
@@ -320,7 +320,7 @@ router.get("/similar/:id", async(req, res)=>{
       gender: { $regex: new RegExp(`^${product.gender}$`, "i") },
     })
       .sort({ rating: -1 })
-      .limit(4);
+      .limit(6);
 
     res.json(similarProducts)
   } catch (error) {

@@ -51,6 +51,7 @@ const OrdersManagement = () => {
             {orders.length > 0 ? (
               orders.map((order) => (
                 <tr
+                  onClick={()=>navigate(`/order/${order._id}`)}
                   key={order._id}
                   className="hover:bg-slate-100 cursor-pointer"
                 >

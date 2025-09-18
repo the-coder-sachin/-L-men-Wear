@@ -118,10 +118,10 @@ const OrderDetailPages = () => {
               <div className="p-3 text-sm bg-slate-100 rounded w-fit mx-auto">
                 <img
                   src={orderItem.image}
-                  className="size-44 rounded mx-auto"
+                  className="size-44 rounded mx-auto object-cover"
                   alt=""
                 />
-                <div className="text-slate-600 capitalize h-full flex flex-col p-3">
+                <div className="text-slate-600 capitalize text-sm h-full flex gap-1 flex-col p-3">
                   <p className="text-lg text-black font-bold">
                     {orderItem.name}
                   </p>
@@ -137,11 +137,11 @@ const OrderDetailPages = () => {
                       {orderItem.size ? orderItem.size : "na"}
                     </span>
                   </p>
-                  <p>
+                  <p className="flex items-center gap-1">
                     color:{" "}
-                    <span className="font-bold text-black uppercase">
-                      {orderItem.color}
-                    </span>
+                    <div className="h-5 w-5 border " style={{backgroundColor: orderItem.color}}>
+                      
+                    </div>
                   </p>
                   <p>
                     price:{" "}

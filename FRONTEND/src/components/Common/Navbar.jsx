@@ -14,7 +14,7 @@ const Navbar = () => {
     <nav className="bg-white text-xs md:text-sm px-2 mt-8 sm:px-5 flex justify-between sticky top-8 inset-x-0 z-[900] border-b border-b-slate-300/70 ">
       {/* logo */}
       <Link to={"/"}>
-        <h1 onClick={()=>window.scrollTo({top:0, behavior:'smooth'})} className="sm:py-4 py-2 text-nowrap font-extrabold text-sm sm:text-2xl cursor-pointer transition-all duration-300 hover:scale-105 active:scale-90">
+        <h1 onClick={()=>window.scrollTo({top:0, behavior:'smooth'})} className="sm:py-4 py-3 text-nowrap font-extrabold text-lg sm:text-2xl cursor-pointer transition-all duration-300 hover:scale-105 active:scale-90">
           Lumen Wear
         </h1>
       </Link>

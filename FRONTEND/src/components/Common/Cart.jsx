@@ -139,7 +139,7 @@ const Cart = () => {
                 {cart && cart?.products?.length > 0 ? (
                   <CartContent cart={cart} userId={userId} guestId={guestId} />
                 ) : (
-                  <div className="h-full w-full flex justify-center items-center">
+                  <div className="h-full w-full flex justify-center items-center text-lg">
                     <p>your bag is empty</p>
                   </div>
                 )}
