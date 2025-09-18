@@ -29,7 +29,7 @@ const OrderDetailPages = () => {
       <h2 className="text-3xl font-bold capitalize mb-8">order details</h2>
 
       {/* container  */}
-      <div className="border border-zinc-200 p-5 px-12 w-[90%] mx-auto gap-7 rounded sm:flex justify-between">
+      <div className="border border-zinc-200 p-5 px-5 w-[90%] mx-auto gap-7 rounded  justify-between">
         {/* top  */}
         <div className="flex flex-col gap-7 justify-between">
           <div>
@@ -112,16 +112,16 @@ const OrderDetailPages = () => {
           </div>
         </div>
         {/* bottom  */}
-        <div className="mt-7 sm:mt-0">
+        <div className="mt-7 flex flex-col gap-5">
           {orderDetails?.orderItems?.map((orderItem) => (
             <Link key={orderItem.productId} to={`/products/${orderItem?.productId}`}>
-              <div className="p-3 text-sm bg-slate-100 rounded w-fit mx-auto">
+              <div className="p-3 text-sm bg-slate-100 rounded w-full flex flex-col md:flex-row md:items-center md:gap-2 shadow-2xl border-gray-400">
                 <img
                   src={orderItem.image}
-                  className="size-44 rounded mx-auto object-cover"
+                  className="size-44 rounded mx-auto object-cover border border-gray-300 shadow-2xl"
                   alt=""
                 />
-                <div className="text-slate-600 capitalize text-sm h-full flex gap-1 flex-col p-3">
+                <div className="text-slate-600 capitalize text-sm w-full h-full flex gap-1 flex-col p-3">
                   <p className="text-lg text-black font-bold">
                     {orderItem.name}
                   </p>
@@ -139,9 +139,9 @@ const OrderDetailPages = () => {
                   </p>
                   <p className="flex items-center gap-1">
                     color:{" "}
-                    <div className="h-5 w-5 border " style={{backgroundColor: orderItem.color}}>
+                    <button className="h-5 w-5 border rounded-full" style={{backgroundColor: orderItem.color}}>
                       
-                    </div>
+                    </button>
                   </p>
                   <p>
                     price:{" "}

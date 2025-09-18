@@ -208,8 +208,8 @@ const Checkout = () => {
           <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3 items-center">
             <p className="font-bold capitalize">enter your details</p>
             <div className="flex gap-5 w-full">
-              <div className="flex flex-col w-full">
-                <label className="block text-sm">first name</label>
+              <div className="">
+                <label className="inline-block text-sm">first name</label>
                 <input
                   type="text"
                   placeholder=""
@@ -220,11 +220,11 @@ const Checkout = () => {
                       firstName: e.target.value,
                     })
                   }
-                  className="border rounded border-gray-200 py-1 px-2 outline-none"
+                  className="border w-full rounded border-gray-200 py-1 px-2 outline-none"
                 />
               </div>
-              <div className="flex flex-col w-full">
-                <label className="block text-sm">last name</label>
+              <div className="">
+                <label className="inline-block text-sm">last name</label>
                 <input
                   type="text"
                   placeholder=""
@@ -235,7 +235,7 @@ const Checkout = () => {
                       lastName: e.target.value,
                     })
                   }
-                  className="border rounded border-gray-200 py-1 px-2 outline-none"
+                  className="border w-full rounded border-gray-200 py-1 px-2 outline-none"
                 />
               </div>
             </div>
@@ -269,7 +269,7 @@ const Checkout = () => {
                       city: e.target.value,
                     })
                   }
-                  className="border rounded border-gray-200 py-1 px-2 outline-none"
+                  className="border w-full rounded border-gray-200 py-1 px-2 outline-none"
                 />
               </div>
               <div className="flex flex-col w-full">
@@ -284,7 +284,7 @@ const Checkout = () => {
                       state: e.target.value,
                     })
                   }
-                  className="border rounded border-gray-200 py-1 px-2 outline-none"
+                  className="border w-full rounded border-gray-200 py-1 px-2 outline-none"
                 />
               </div>
             </div>
@@ -302,7 +302,7 @@ const Checkout = () => {
                       postalCode: e.target.value,
                     })
                   }
-                  className="border rounded border-gray-200 py-1 px-2 outline-none"
+                  className="border w-full rounded border-gray-200 py-1 px-2 outline-none"
                 />
               </div>
               <div className="flex flex-col w-full">
@@ -317,7 +317,7 @@ const Checkout = () => {
                       country: e.target.value,
                     })
                   }
-                  className="border rounded border-gray-200 py-1 px-2 outline-none"
+                  className="border w-full rounded border-gray-200 py-1 px-2 outline-none"
                 />
               </div>
             </div>
@@ -366,13 +366,13 @@ const Checkout = () => {
                 {/* description  */}
                 <div className="flex flex-col min-h-full w-full justify-center items-start gap-2  ml-3 capitalize">
                   <span className="leading-4 pr-1">
-                    {item.name.length > 40
-                      ? item.name.slice(0, 25) + "..."
+                    {item.name.length > 45
+                      ? item.name.slice(0, 45) + "..."
                       : item.name}
                   </span>
                   <div className="flex text-xs">
-                    <span>
-                      size: {item.size} | color: {item.color}
+                    <span className="flex items-center">
+                      size: {item.size} | color: <button className="h-4 w-4 border ml-1 rounded-full" style={{backgroundColor: item.color}}></button>
                     </span>
                   </div>
                   {/* quantity  */}

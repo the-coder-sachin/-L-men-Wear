@@ -78,10 +78,10 @@ useEffect(() => {
   return (
     <>
       <div
-        className={`flex flex-col gap-8 p-6 lg:p-8 lg:flex-row overflow-hidden`}
+        className={`flex flex-col gap-8 p-6 xl:p-8 xl:flex-row overflow-hidden`}
       >
         {/* left - confirmation panel */}
-        <div className="grow p lg:w-1/2">
+        <div className="grow p xl:w-1/2">
           {/* thankyou message  */}
           <div className="text-center">
             <p className="text-3xl font-bold text-green-600 capitalize mb-3 animate-bounce">
@@ -101,27 +101,27 @@ useEffect(() => {
             <div className="flex flex-col gap-2">
               <div className="flex justify-between capitalize">
                 <p className="font-bold">name</p>
-                <p>{user.name}</p>
+                <p className="lowercase">{user.name}</p>
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between capitalize">
                 <p className="font-bold">email</p>
-                <p>{user.email}</p>
+                <p className="lowercase">{user.email}</p>
               </div>
               <div className="flex justify-between capitalize">
                 <p className="font-bold">phone</p>
                 <p>{checkout?.shippingDetails?.phone}</p>
               </div>
-              <div className="flex justify-between capitalize">
-                <p className="font-bold">address</p>
-                <div className="flex">
-                  <p className="text-end">
+              <div className="flex justify-between">
+                <p className="font-bold capitalize">address</p>
+                <div className="flex w-1/2 justify-end flex-wrap gap-1 lowercase">
+                  <p className="">
                     {checkout.shippingDetails.address},
                   </p>
-                  <p className="text-end"> {checkout.shippingDetails.city}, </p>
-                  <p className="text-end">
+                  <p className=""> {checkout.shippingDetails.city}, </p>
+                  <p className="">
                     postal code: {checkout.shippingDetails.postalCode},
                   </p>
-                  <p className="text-end">{checkout.shippingDetails.country}</p>
+                  <p className="uppercase">{checkout.shippingDetails.country}</p>
                 </div>
               </div>
             </div>
@@ -142,18 +142,18 @@ useEffect(() => {
         </div>
 
         {/* right  */}
-        <div className="p-8 bg-gray-200 lg:w-1/2">
+        <div className="p-8 bg-gray-200 xl:w-1/2">
           <p className="text-3xl font-bold capitalize">order summary</p>
 
           {/* order details  */}
-          <div className="flex justify-evenly font-bold my-4 text-sm">
+          <div className="flex flex-col gap-3 md:flex-row md:gap-0 justify-evenly font-bold my-4 text-sm">
             <div className="">
               <p className="text-center text-slate-500">order date</p>
               <p className="text-center">
                 {new Date(checkout.createdAt).toDateString()}
               </p>
             </div>
-            <div className="border-x border-x-gray-400 px-4">
+            <div className="border-y py-4 md:border-y-0 md:py-0 md:border-x border-gray-400 px-4">
               <p className="text-center text-slate-500">order number</p>
               <p className="text-center">#{checkout._id}</p>
             </div>
@@ -185,9 +185,9 @@ useEffect(() => {
                       ? item.name.slice(0, 25) + "..."
                       : item.name}
                   </span>
-                  <div className="flex text-xs">
-                    <span>
-                      size: {item.size} | color: {item.color}
+                  <div className="flex text-xs items-center">
+                    <span className="flex items-center">
+                      size: {item.size} | color: <button className="h-4 w-4 rounded-full border ml-1" style={{backgroundColor: item.color}}></button>
                     </span>
                   </div>
                   {/* quantity  */}
