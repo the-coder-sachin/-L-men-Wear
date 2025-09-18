@@ -2,7 +2,7 @@
 
 const ErrorMessage = ({ message = "Something went wrong", onRetry }) => {
   return (
-    <div className="flex flex-col items-center justify-center h-64 text-red-600 bg-red-50 border border-red-300 rounded p-4 text-center">
+    <div className="flex flex-col items-center justify-center min-w-full h-64 text-red-600 bg-red-50 border border-red-300 rounded p-4 text-center">
       <p className="text-xl font-semibold mb-2">⚠️ Error</p>
       <p className="text-sm mb-4">{message}</p>
       {onRetry && (

@@ -91,7 +91,10 @@ const Search = () => {
                 autoPlay
                 loop
                 muted
-                className="max-w-[560px]"
+                playsInline
+                disablePictureInPicture
+                controls={false}
+                className="max-w-[560px] select-none"
               ></motion.video>
             </motion.div>
 

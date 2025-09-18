@@ -4,6 +4,8 @@ import { BiDislike } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchUserOrders } from "../../redux/slices/orderSlice";
+import LoadingSpinner from "../Common/LoadingSpinner";
+import ErrorMessage from "../Common/ErrorMessage";
 
 const ProfileTabs = ({ activeTab }) => {
 
@@ -296,12 +298,14 @@ const ProfileTabs = ({ activeTab }) => {
         {" "}
         {activeTab === "orders" && loading && (
           <p className="p-40 flex justify-center items-center text-3xl animate-pulse text-slate-500">
+            <span><LoadingSpinner/></span>
             loading.......
           </p>
         )}
         {activeTab === "orders" && error && (
-          <p className="p-40 flex justify-center items-center text-3xl animate-pulse text-slate-500">
-            ERROR: {error}
+          <p className=" flex justify-center items-center text-3xl animate-pulse text-slate-500">
+            
+            <p className="w-screen p-6"><ErrorMessage message={error}/></p>
           </p>
         )}
         {/* order container  */}
