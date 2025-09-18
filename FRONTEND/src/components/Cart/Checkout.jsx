@@ -191,7 +191,7 @@ const Checkout = () => {
         className={`flex flex-col-reverse p-6 lg:p-8 lg:flex-row overflow-hidden`}
       >
         {/* left - shipping address form */}
-        <div className="p-8 grow">
+        <div className="mt-6 lg:mt-0 lg:p-8 grow">
           <p className="text-3xl font-bold uppercase tracking-wider">
             checkout
           </p>
@@ -205,9 +205,9 @@ const Checkout = () => {
               value={user.email}
             />
           </div>
-          <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3">
+          <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3 items-center">
             <p className="font-bold capitalize">enter your details</p>
-            <div className="flex gap-5">
+            <div className="flex gap-5 w-full">
               <div className="flex flex-col w-full">
                 <label className="block text-sm">first name</label>
                 <input
@@ -256,7 +256,7 @@ const Checkout = () => {
               />
             </div>
 
-            <div className="flex gap-5">
+            <div className="flex gap-5 w-full">
               <div className="flex flex-col w-full">
                 <label className="block text-sm">city</label>
                 <input
@@ -289,7 +289,7 @@ const Checkout = () => {
               </div>
             </div>
 
-            <div className="flex gap-5">
+            <div className="flex gap-5 w-full">
               <div className="flex flex-col w-full">
                 <label className="block text-sm">postal code</label>
                 <input
@@ -340,7 +340,7 @@ const Checkout = () => {
 
             <button
               type="submit"
-              className="bg-black text-white font-bold py-2 rounded transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer hover:opacity-90"
+              className="bg-black w-full text-white font-bold py-2 rounded transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer hover:opacity-90"
             >
               proceed to pay
             </button>
