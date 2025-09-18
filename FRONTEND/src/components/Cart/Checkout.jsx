@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createCheckout } from "../../redux/slices/checkoutSlice";
 import { toast } from "sonner";
+import { createOrder } from "../../redux/slices/orderSlice";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -24,8 +25,8 @@ const Checkout = () => {
   }, []);
 
   const [shippingAddress, setShippingAddress] = useState({
-    firstName: "",
-    lastName: "",
+    firstName: user?.name.split(" ")[0],
+    lastName: user?.name.split(" ")[1],
     address: "",
     city: "",
     state: "",
@@ -80,9 +81,14 @@ const Checkout = () => {
       return acc + product.quantity * product.price;
     }, 0)
   );
+  const subMRPTotalAmount = Math.floor(
+    cart.products.reduce((acc, product) => {
+      return acc + product.quantity * product.mrp;
+    }, 0)
+  );
 
   const shippingCharges = subTotalAmount > 1000 ? 40 : 120;
-  const taxes = Math.round((30 / 100) * subTotalAmount);
+  const taxes = Math.floor((30 / 100) * subTotalAmount);
 
   const orderTotal = subTotalAmount + shippingCharges + taxes;
 
@@ -90,13 +96,14 @@ const Checkout = () => {
 
   const finalAmount = orderTotal - discount;
 
+  const savings = (subMRPTotalAmount + 120 + (3/10 * subMRPTotalAmount) ) - finalAmount;
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(validateShippingDetails()){
     setIsSubmitting(true);
-    console.log(shippingAddress);
 
     if (cart && cart.products.length > 0) {
       // 3-second delay before checkout
@@ -112,14 +119,36 @@ const Checkout = () => {
           })
         );
 
-        console.log("res-payload:", res);
 
-        if (res.payload && res.payload._id) {
-          setCheckoutId(res.payload._id);
-          navigate("/order-confirmation");
+      if (res.payload && res.payload._id) {
+        const checkoutData = res.payload;
+
+        // ✅ Now create the order
+        const orderRes = await dispatch(
+          createOrder({
+            orderItems: cart.products,
+            shippingDetails: shippingAddress,
+            totalPrice: finalAmount,
+            isPaid: true, // or false, based on your flow
+            paidAt: new Date().toISOString(), // use current date/time
+          })
+        );
+
+        if (createOrder.fulfilled.match(orderRes)) {
+          const orderId = orderRes.payload._id;
+
+          // ✅ Navigate to order confirmation page with order ID
+          navigate("/order-confirmation", {
+            state: {
+              orderId,
+              checkoutId: checkoutData._id,
+            },
+          });
         } else {
-          console.log("Payment failed or no payload received");
+          toast.error("Failed to create order");
         }
+      }
+
       } catch (error) {
         console.error("Checkout error:", error);
       }
@@ -349,6 +378,9 @@ const Checkout = () => {
                   {/* quantity  */}
                   <div className="flex w-fit gap-1 rounded-lg overflow-hidden">
                     <span className="select-none text-xs">
+                      MRP: ${item.mrp}
+                    </span>
+                    <span className="select-none text-xs">
                       Quantity: {item.quantity}
                     </span>
                   </div>
@@ -367,22 +399,30 @@ const Checkout = () => {
               <p>${subTotalAmount}</p>
             </div>
             <div className="flex w-full justify-between">
+              <p>total MRP</p>
+              <p>${subMRPTotalAmount}</p>
+            </div>
+            <div className="flex w-full justify-between">
               <p>shipping charges</p>
               <p>${shippingCharges}</p>
             </div>
             <div className="flex w-full justify-between">
-              <p>taxes</p>
+              <p>taxes (30%)</p>
               <p>${taxes}</p>
             </div>
             <div className="flex w-full justify-between font-bold mt-2 pt-2 border-t border-t-slate-400 text-sm">
               <p>order total</p>
               <p>${orderTotal}</p>
             </div>
-            <div className="flex w-full justify-between">
+            <div className="flex w-full justify-between text-amber-500 font-bold">
               <p>discount</p>
               <p>${discount}</p>
             </div>
-            <div className="flex w-full justify-between font-bold mt-2 pt-2 border-t border-t-slate-400 text-base">
+            <div className="flex w-full justify-between text-green-500 font-bold ">
+              <p>savings</p>
+              <p>${Math.ceil(savings)}</p>
+            </div>
+            <div className="flex w-full uppercase justify-between font-bold mt-2 pt-2 border-t border-t-slate-400 text-base">
               <p>final amount</p>
               <p>${finalAmount}</p>
             </div>

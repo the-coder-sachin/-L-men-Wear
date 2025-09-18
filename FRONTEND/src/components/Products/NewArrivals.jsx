@@ -66,7 +66,7 @@ const updateScroll = () => {
 
   return (
     <section data-scroll className="relative">
-      <div className="container mx-auto text-center mb-2 relative">
+      <div className="container mx-auto text-center mb-2 relative px-5">
         <h2 className="text-3xl font-bold mb-4 capitalize">
           Explore new arrivals
         </h2>

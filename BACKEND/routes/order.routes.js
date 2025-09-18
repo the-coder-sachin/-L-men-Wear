@@ -64,13 +64,6 @@ router.post('/' , isLoggedin, async (req, res)=>{
         const{orderItems, shippingDetails, totalPrice, paidAt } = req.body;
 
         const user = req.user._id;
-
-        console.log({
-            orderItems:orderItems,
-            shippingDetails:shippingDetails,
-            totalPrice:totalPrice,
-            user:user
-        });
         if (!orderItems || orderItems.length === 0) {
           return res.status(400).json({ message: "No order items" });
         }

@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createProduct } from "../../redux/slices/adminProductSlice";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddProductPage = () => {
   const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const genderOptions = ["men", "women", "unisex"];
   const colorOptions = [
@@ -94,7 +96,7 @@ const AddProductPage = () => {
     sku: "",
     sizes: [],
     colors: [],
-    material: [],
+    material: "",
     images: [],
     user: user.id,
   });
@@ -102,10 +104,22 @@ const AddProductPage = () => {
   const [uploading, setUploading] = useState(false);
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(createProduct(productDetails));
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await dispatch(createProduct(productDetails));
+
+    if (res.payload && res.meta.requestStatus === "fulfilled") {
+      // ✅ Navigate only if product creation was successful
+      navigate("/admin/products"); // or wherever you want
+    } else {
+      console.error("Product creation failed");
+    }
+  } catch (error) {
+    console.error("Error in product creation:", error);
+  }
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -193,7 +207,7 @@ const AddProductPage = () => {
                 sku: "",
                 sizes: [],
                 colors: [],
-                material: [],
+                material: "",
                 images: [],
                 user: user.id,
               })
@@ -228,7 +242,7 @@ const AddProductPage = () => {
 
           {/* Price */}
           <label className="block mt-5 text-slate-500 text-sm capitalize">
-            Price
+            Price ($)
           </label>
           <input
             type="number"
@@ -240,7 +254,7 @@ const AddProductPage = () => {
 
           {/* MRP */}
           <label className="block mt-5 text-slate-500 text-sm capitalize">
-            MRP
+            MRP ($)
           </label>
           <input
             type="number"
@@ -311,13 +325,11 @@ const AddProductPage = () => {
                 onClick={() =>
                   setProductDetails((prev) => ({
                     ...prev,
-                    material: prev.material.includes(m)
-                      ? prev.material.filter((mat) => mat !== m)
-                      : [...prev.material, m],
+                    material: prev.material === m ? "" : m,
                   }))
                 }
                 className={`border px-2 py-1 cursor-pointer ${
-                  productDetails.material.includes(m)
+                  productDetails.material ===m
                     ? "bg-blue-500 text-white"
                     : "bg-white"
                 }`}
@@ -328,7 +340,7 @@ const AddProductPage = () => {
           </div>
           <button
             type="button"
-            onClick={() => handleClearSelection("materials")}
+            onClick={() => handleClearSelection("material")}
             className="text-blue-500 text-sm underline mt-2 cursor-pointer"
           >
             Clear Materials
@@ -363,6 +375,13 @@ const AddProductPage = () => {
           </div>
           <button
             type="button"
+            onClick={() => setProductDetails(prev=> ({...prev, sizes: sizeOptions}))}
+            className="text-green-700 text-sm bg-green-200 mt-2 cursor-pointer px-1 mr-5"
+          >
+            All Sizes Available
+          </button>
+          <button
+            type="button"
             onClick={() => handleClearSelection("sizes")}
             className="text-blue-500 text-sm underline mt-2 cursor-pointer"
           >
@@ -386,7 +405,7 @@ const AddProductPage = () => {
                       : [...prev.colors, c],
                   }))
                 }
-                style={{ backgroundColor: c, }}
+                style={{ backgroundColor: c }}
                 className={`w-8 h-8 rounded-full cursor-pointer ${
                   productDetails.colors.includes(c)
                     ? "border-4 border-blue-500"
@@ -420,7 +439,7 @@ const AddProductPage = () => {
                 key={idx}
                 src={image}
                 alt="img"
-                className="size-28 bg-slate-100"
+                className="size-28 bg-slate-100 object-cover"
               />
             ))}
           </div>

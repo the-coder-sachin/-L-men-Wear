@@ -25,7 +25,11 @@ const CartContent = ({cart, userId, guestId}) => {
           className="mt-3 shadow-[0px_-3px_5px_0.1px_rgba(255,255,255,0.01)] border-t border-slate-900 flex items-center justify-between p-3 text-xs"
         >
           {/* image  */}
-          <img src={item.image} alt="img" className="h-20 w-16 object-cover rounded" />
+          <img
+            src={item.image}
+            alt="img"
+            className="h-20 w-16 object-cover rounded"
+          />
           {/* description  */}
           <div className="flex flex-col h-full w-full justify-between items-start ml-3 capitalize">
             <span className="text-white leading-4 pr-1">
@@ -33,13 +37,13 @@ const CartContent = ({cart, userId, guestId}) => {
                 ? item.name.slice(0, 25) + "..."
                 : item.name}
             </span>
-            <div className="flex text-xs">
+            <div className="text-xs text-slate-300">
               <span>
                 size: {item.size} | color: {item.color}
               </span>
             </div>
             {/* quantity  */}
-            <div className="flex border border-slate-700/30 w-fit gap-1 rounded-lg overflow-hidden">
+            <div className="flex border border-slate-300 w-fit gap-1 rounded-lg overflow-hidden">
               <button
                 onClick={() =>
                   handleAddToCart(
@@ -50,7 +54,7 @@ const CartContent = ({cart, userId, guestId}) => {
                     item.color
                   )
                 }
-                className="cursor-pointer rounded-l-lg w-full px-1 transition-all duration-300 hover:bg-white hover:text-black hover:scale-110 active:scale-90"
+                className="cursor-pointer rounded-l-lg w-full px-1 transition-all duration-300 hover:bg-white hover:text-black hover:scale-110 active:scale-90 text-slate-300"
               >
                 <FiMinus />
               </button>
@@ -67,23 +71,31 @@ const CartContent = ({cart, userId, guestId}) => {
                     item.color
                   )
                 }
-                className="cursor-pointer rounded-r-lg w-full px-1 transition-all duration-300 hover:bg-white hover:text-black hover:scale-110 active:scale-90"
+                className="cursor-pointer rounded-r-lg w-full px-1 transition-all duration-300 hover:bg-white hover:text-black hover:scale-110 active:scale-90 text-slate-300"
               >
                 <FiPlus />
               </button>
             </div>
           </div>
           {/* price & remove */}
-          <div className="flex flex-col w-14 self-end h-full justify-between text-end items-end">
-            <span onClick={()=>handleRemoveFromCart(item.productId, item.size, item.color)} className="transition-all duration-300 cursor-pointer hover:text-white hover:scale-110 active:scale-90">
+          <div className="flex flex-col min-w-14 text-nowrap self-end h-full justify-between text-end items-end ">
+            <span
+              onClick={() =>
+                handleRemoveFromCart(item.productId, item.size, item.color)
+              }
+              className="transition-all duration-300 cursor-pointer hover:text-white hover:scale-110 active:scale-90"
+            >
               <RxCross1 />
             </span>
-            <span className="text-white font-bold">${item.price}</span>
+            <div>
+              <span className="text-white block">PRICE: ${item.price}</span>
+              <span className="text-xs block text-slate-500">
+                MRP: ${item.mrp}
+              </span>
+            </div>
           </div>
         </div>
       ))}
-
-     
     </>
   );
 };

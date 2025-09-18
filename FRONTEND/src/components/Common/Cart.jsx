@@ -47,7 +47,7 @@ const Cart = () => {
       {/* cart button for navbar  */}
       <button
         onClick={handleCartToggle}
-        className="relative cursor-pointer text-xl transition-all duration-300 active:scale-90 pt-1 hover:scale-110 hover:text-black"
+        className="relative cursor-pointer text-lg transition-all duration-300 active:scale-90 pt-1 hover:scale-110 hover:text-black"
       >
         <PiHandbagLight />
         {cartItemCount ? (
@@ -62,6 +62,7 @@ const Cart = () => {
         {isOpen && (
           //  dark overlay
           <motion.div
+            onClick={()=>setIsOpen(false)}
             initial={{
               backgroundColor: "rgba(0,0,0,0)",
               backdropFilter: "blur(0px)",
@@ -78,8 +79,9 @@ const Cart = () => {
             className="bg-black/80 h-screen w-full fixed inset-0 "
           >
             <motion.section
+              onClick={e=>e.stopPropagation()}
               key={"overlay"}
-              className={`fixed z-50 top-8 bottom-0 right-0 h-screen bg-black flex flex-col`}
+              className={`fixed z-[50] top-0 bottom-0 right-0 min-h-screen bg-black flex flex-col`}
               initial={{
                 width: "0vw",
               }}
@@ -90,11 +92,11 @@ const Cart = () => {
                 width: "0vw",
               }}
               transition={{
-                duration: 0.8,
+                duration: 0.3,
               }}
             >
               {/* your cart  */}
-              <div className="flex items-center justify-between">
+              <div className="flex mt-8 items-center justify-between">
                 {/* close button  */}
                 <motion.button
                   initial={{ opacity: 0 }}

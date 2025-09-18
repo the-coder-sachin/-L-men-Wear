@@ -37,11 +37,11 @@ useEffect(() => {
 const handleSubmit = (e)=>{
     e.preventDefault();
     let name = firstName + " " + lastName
-    dispatch(registerUser({ name, email, password}))
+    dispatch(registerUser({ name, email, password}));
+    navigate('/')
 }
 
  useEffect(() => {
-   console.log("Component mounted");
    window.scrollTo(0, 0);
  }, []);
 

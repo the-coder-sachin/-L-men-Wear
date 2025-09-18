@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const ProductsGrid = ({products}) => {
   return (
     <div className="flex justify-center">
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-5 p-5">
+      <div className="grid grid-cols-2 md:grid-cols-2 md:gap-10 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:p-12">
         {products.map((product) => (
           // img
           <Link
@@ -12,7 +12,7 @@ const ProductsGrid = ({products}) => {
             className="w-fit mx-auto"
           >
             <div className="cards mx-auto relative">
-              <div className="img h-[210px] w-[160px] sm:size-[250px]">
+              <div className="img h-[185px] w-[165px] sm:size-[250px] md:size-[300px] lg:size-[230px]">
                 <img
                   src={product.images[0]}
                   alt="img"

@@ -30,7 +30,7 @@ const SortOption = () => {
   };
 
   return (
-    <div className="flex justify-end">
+    <div className="flex self-end rounded w-fit bg-red-700">
       <Select
         options={options}
         placeholder={"Sort by"}
@@ -90,7 +90,7 @@ const SortOption = () => {
             color: "#9ca3af",
           }),
         }}
-        className="w-1/4 text-xs"
+        className=" text-xs"
       />
     </div>
   );

@@ -9,48 +9,21 @@ const OrderDetailPages = () => {
 
   const dispatch = useDispatch();
 
-  const {orderDetails, loading, error} = useSelector(state=> state.orders);
+  const { orderDetails, loading, error } = useSelector((state) => state.orders);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(fetchOrderDetails(id));
-    console.log(orderDetails);
-    
-  },[dispatch, id ])
+  }, [dispatch, id]);
 
-  // useEffect(() => {
-  //   const mockOrderDetails = {
-  //     _id: id,
-  //     createdAt: new Date(),
-  //     isPaid: true,
-  //     isDelivered: false,
-  //     paymentMethod: "cash",
-  //     shippingMethod: "standard",
-  //     shippingAddress: {
-  //       city: "patna",
-  //       country: "india",
-  //     },
-  //     orderItem: {
-  //       name: "purse",
-  //       quantity: 1,
-  //       size: "",
-  //       price: 979797,
-  //       mrp: 999999,
-  //       color: "hazel",
-  //       image: "https://picsum.photos/200?random=1",
-  //     },
-  //   };
-  //   setOrderDetails(mockOrderDetails);
-  // }, [id]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-   useEffect(() => {
-     window.scrollTo(0, 0);
-   }, []);
-
-   if(loading) return <p>loading.......</p>
-   if(error) return <p>ERROR.......{error}</p>
+  if (loading) return <p>loading.......</p>;
+  if (error) return <p>ERROR.......{error}</p>;
 
   return (
-    <div className="p-8">
+    <div className="p-5">
       <h2 className="text-3xl font-bold capitalize mb-8">order details</h2>
 
       {/* container  */}
@@ -91,14 +64,24 @@ const OrderDetailPages = () => {
             <h3 className="font-black text-black text-lg capitalize mb-2">
               shipping info
             </h3>
+            <div className="">
+              <p>
+                customer name:{" "}
+                <span className="text-black font-bold">
+                  {orderDetails?.shippingDetails.firstName}{" "}
+                  {orderDetails?.shippingDetails.lastName}
+                </span>
+              </p>
+
+              <p>
+                phone:{" "}
+                <span className="text-black font-bold ">
+                  {orderDetails?.shippingDetails.phone}
+                </span>
+              </p>
+            </div>
             <p>
-              shipping type:{" "}
-              <span className="font-black text-black">
-                {orderDetails?.shippingMethod}
-              </span>
-            </p>
-            <p>
-              status:{" "}
+              order status:{" "}
               <span
                 className={`${
                   orderDetails?.isDelivered
@@ -106,14 +89,22 @@ const OrderDetailPages = () => {
                     : "text-red-500 font-bold "
                 }`}
               >
-                {orderDetails?.isDelivered ? "paid" : "pending"}
+                {orderDetails?.status}
               </span>
             </p>
             <p>
               address:{" "}
               <span className="text-black font-bold">
+                {orderDetails?.shippingDetails.address},{" "}
                 {orderDetails?.shippingDetails.city},{" "}
+                {orderDetails?.shippingDetails.state},{" "}
                 {orderDetails?.shippingDetails.country}
+              </span>
+            </p>
+            <p>
+              postal code:{" "}
+              <span className="text-black font-bold">
+                {orderDetails?.shippingDetails.postalCode},{" "}
               </span>
             </p>
           </div>
@@ -121,11 +112,11 @@ const OrderDetailPages = () => {
         {/* bottom  */}
         <div className="mt-7 sm:mt-0">
           {orderDetails?.orderItems?.map((orderItem) => (
-            <Link to={`/products/${orderDetails?._id}`}>
-              <div className="p-3 bg-slate-100 rounded w-fit mx-auto">
+            <Link key={orderItem.productId} to={`/products/${orderItem?.productId}`}>
+              <div className="p-3 text-sm bg-slate-100 rounded w-fit mx-auto">
                 <img
                   src={orderItem.image}
-                  className="size-44 rounded"
+                  className="size-44 rounded mx-auto"
                   alt=""
                 />
                 <div className="text-slate-600 capitalize h-full flex flex-col p-3">
@@ -141,9 +132,7 @@ const OrderDetailPages = () => {
                   <p>
                     size:{" "}
                     <span className="font-bold text-black">
-                      {orderItem.size
-                        ? orderItem.size
-                        : "na"}
+                      {orderItem.size ? orderItem.size : "na"}
                     </span>
                   </p>
                   <p>
@@ -158,8 +147,17 @@ const OrderDetailPages = () => {
                       ${orderItem.price}
                     </span>
                   </p>
-                  <p className="text-xs text-gray-500 font-light">
-                    MRP: ${orderItem.mrp}
+                  <p className=" text-gray-500 font-light">
+                    MRP:{" "}
+                    <span className="text-black font-bold">
+                      ${orderItem.mrp}
+                    </span>
+                  </p>
+                  <p className=" text-gray-500 font-light">
+                    TOTAL:{" "}
+                    <span className="text-black font-bold">
+                      ${orderItem.price * orderItem.quantity}
+                    </span>
                   </p>
                 </div>
               </div>

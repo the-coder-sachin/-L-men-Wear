@@ -315,11 +315,12 @@ router.get("/similar/:id", async(req, res)=>{
       return res.status(404).json({message: "product not found"})
     }
 
-    const similarProducts = await Product.find(
-      {_id : {$ne : id},
-      gender: product.gender
-    }
-    ).sort({rating: -1}).limit(4)
+    const similarProducts = await Product.find({
+      _id: { $ne: id },
+      gender: { $regex: new RegExp(`^${product.gender}$`, "i") },
+    })
+      .sort({ rating: -1 })
+      .limit(4);
 
     res.json(similarProducts)
   } catch (error) {

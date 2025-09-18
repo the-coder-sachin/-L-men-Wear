@@ -1,45 +1,10 @@
-// const recentOrders = [
-//   {
-//     _id: "ORD001",
-//     user: "Ravi Kumar",
-//     price: 2499.99,
-//     status: "Processing",
-//   },
-//   {
-//     _id: "ORD002",
-//     user: "Ayesha Khan",
-//     price: 899.5,
-//     status: "Shipped",
-//   },
-//   {
-//     _id: "ORD003",
-//     user: "John Doe",
-//     price: 129.99,
-//     status: "Delivered",
-//   },
-//   {
-//     _id: "ORD004",
-//     user: "Priya Sharma",
-//     price: 349.0,
-//     status: "Cancelled",
-//   },
-//   {
-//     _id: "ORD005",
-//     user: "Aman Verma",
-//     price: 4999.0,
-//     status: "Processing",
-//   },
-
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAdminProducts } from "../../redux/slices/adminProductSlice";
 import { fetchAllOrders } from "../../redux/slices/adminOrderSlice";
 import { useNavigate } from "react-router-dom";
 
-// ];
-const recentOrders = [
- 
-];
+
 
 const AdminHomePage = () => {
   const navigate = useNavigate();
@@ -53,7 +18,7 @@ const AdminHomePage = () => {
   }, [])
   
   return (
-    <div className="p-8">
+    <div className="p-5">
       <h3 className="capitalize text-3xl font-bold">admin dashboard</h3>
 
       {/* cards  */}
@@ -99,7 +64,7 @@ const AdminHomePage = () => {
       )}
 
       {/* recent orders list  */}
-      <div className="mt-7">
+      <div className="mt-7 flex flex-col justify-center">
         <h3 className="capitalize text-xl font-bold">recent orders</h3>
         <table className="min-w-full border border-slate-200 my-3 shadow-2xl">
           <thead>
@@ -117,8 +82,8 @@ const AdminHomePage = () => {
                   key={order._id}
                   className="text-xs text-slate-700 border-b border-b-slate-200 cursor-pointer hover:bg-slate-100"
                 >
-                  <td className="p-3">{order._id}</td>
-                  <td className="p-3">{order.user?.name}</td>
+                  <td className="p-3">#{order._id.slice(0,9)}..</td>
+                  <td className="p-3">{order.user?.name.split(" ")[0]}</td>
                   <td className="p-3">$ {order.totalPrice.toLocaleString()}</td>
                   <td className="p-3">{order.status}</td>
                 </tr>

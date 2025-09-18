@@ -78,16 +78,18 @@ useEffect(() => {
           {!isSidebarOpen && (
             <button
               onClick={toggleSidebar}
-              className="px-4 py-2 bg-black text-sm text-white hover:bg-slate-900 transition flex items-center justify-center cursor-pointer active:scale-95 lg:hidden shrink mb-5"
+              className="px-4 py-2 bg-black text-xs rounded text-white hover:bg-slate-900 transition flex items-center justify-center cursor-pointer active:scale-95 lg:hidden shrink mb-5"
             >
               <CiFilter />
               <span>Filter</span>
             </button>
           )}
-           <p className={`${isSidebarOpen && 'pl-43'} pl-5`}>All collections</p> 
+           <p className={`${isSidebarOpen? "pl-[92.78px]": "pl-5"} mb-5`}>All collections</p> 
         </div>
 
+          <div className="m-2 flex justify-end">
         <SortOption />
+          </div>
         <ProductsGrid products={products} loading={loading} error={error} />
       </div>
     </div>

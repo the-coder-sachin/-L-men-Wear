@@ -103,10 +103,8 @@ const ProductDetail = ({ productId }) => {
 
   return (
     <section data-scroll className="overflow-hidden">
-      <p className="text-3xl font-bold text-center md:mt-12 md:mb-0 my-5 capitalize">
-        Best Seller of the Season
-      </p>
-      <div className="flex flex-col md:flex-row">
+      
+      <div className="flex flex-col md:flex-row mt-5">
         {/* Images */}
         <div className="flex flex-col-reverse md:flex-row gap-5 px-10 items-center justify-center">
           {/* Thumbnails */}
@@ -169,45 +167,51 @@ const ProductDetail = ({ productId }) => {
 
           <div className="flex flex-col gap-4 mt-4">
             {/* Material */}
-            <div className="flex gap-2 items-center">
-              <p className="uppercase text-sm text-slate-600">Material:</p>
-              <div className="font-semibold">{selectedProduct.material}</div>
-            </div>
+            {selectedProduct.material && (
+              <div className="flex gap-2 items-center">
+                <p className="uppercase text-sm text-slate-600">Material:</p>
+                <div className="font-semibold">{selectedProduct.material}</div>
+              </div>
+            )}
 
             {/* Color */}
-            <div className="flex gap-2 items-center">
-              <p className="uppercase text-sm text-slate-500">Color:</p>
-              <div className="flex gap-2">
-                {selectedProduct?.colors?.map((color, i) => (
-                  <span
-                    onClick={() => setSelectedColor(color)}
-                    key={i}
-                    style={{ backgroundColor: color }}
-                    className={`size-5 border cursor-pointer transition-transform ${
-                      selectedColor === color ? "scale-150" : ""
-                    }`}
-                  ></span>
-                ))}
+            {selectedProduct?.colors.length > 0 && (
+              <div className="flex gap-2 items-center">
+                <p className="uppercase text-sm text-slate-500">Color:</p>
+                <div className="flex gap-2">
+                  {selectedProduct?.colors?.map((color, i) => (
+                    <span
+                      onClick={() => setSelectedColor(color)}
+                      key={i}
+                      style={{ backgroundColor: color }}
+                      className={`size-5 border cursor-pointer transition-transform ${
+                        selectedColor === color ? "scale-150" : ""
+                      }`}
+                    ></span>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Size */}
-            <div className="flex gap-2 items-center">
-              <p className="text-sm uppercase text-slate-600">Size:</p>
-              <div className="flex gap-2">
-                {selectedProduct?.sizes?.map((s, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setSelectedSize(s)}
-                    className={`px-1 text-sm border border-slate-600/30 flex justify-center items-center transition-all duration-300 hover:bg-black hover:text-white hover:scale-110 active:scale-90 uppercase inter ${
-                      selectedSize === s ? "bg-black text-white" : ""
-                    }`}
-                  >
-                    {s}
-                  </button>
-                ))}
+            {selectedProduct?.sizes.length > 0 && (
+              <div className="flex gap-2 items-center">
+                <p className="text-sm uppercase text-slate-600">Size:</p>
+                <div className="flex gap-2">
+                  {selectedProduct?.sizes?.map((s, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setSelectedSize(s)}
+                      className={`px-1 text-sm border border-slate-600/30 flex justify-center items-center transition-all duration-300 hover:bg-black hover:text-white hover:scale-110 active:scale-90 uppercase inter ${
+                        selectedSize === s ? "bg-black text-white" : ""
+                      }`}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Quantity */}
             <div className="flex gap-2 items-center ">

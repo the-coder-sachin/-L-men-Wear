@@ -38,6 +38,9 @@ const Home = () => {
       <Hero />
       <GenderCollection />
       <NewArrivals />
+      <p className="text-3xl font-bold text-center md:mt-12 md:mb-0 my-5 capitalize">
+        Best Seller of the Season
+      </p>
       {bestSellerProduct && <ProductDetail productId={bestSellerProduct._id} />}
       <FeatureSection />
     </>

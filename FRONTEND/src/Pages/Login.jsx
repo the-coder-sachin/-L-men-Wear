@@ -34,11 +34,11 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser({email, password}))
+    dispatch(loginUser({email, password}));
+    navigate("/");
   };
 
   useEffect(() => {
-    console.log("Component mounted");
     window.scrollTo(0, 0);
   }, []);
 

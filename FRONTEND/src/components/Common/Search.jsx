@@ -57,7 +57,7 @@ const Search = () => {
       {/* Search button (nav) */}
       <button
         onClick={handleSearchToggle}
-        className="cursor-pointer text-xl transition-all duration-300 active:scale-90 pt-1 hover:scale-110 hover:text-black"
+        className="cursor-pointer text-lg transition-all duration-300 active:scale-90 pt-1 hover:scale-110 hover:text-black"
       >
         <CiSearch />
       </button>

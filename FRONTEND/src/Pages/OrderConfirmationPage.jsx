@@ -1,19 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IoReturnDownBack } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { clearCart, clearCartFromBackend } from "../redux/slices/cartSlice";
 import { createOrder } from "../redux/slices/orderSlice";
+import { useLocation } from "react-router-dom";
+
 
 const OrderConfirmationPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { orderId } = location.state || {};
+
   const { checkout } = useSelector((state) => state.checkout);
   const { user, guestId } = useSelector((state) => state.auth);
 
   const subTotalAmount = Math.floor(
     checkout?.checkoutItems?.reduce((acc, product) => {
       return acc + product.quantity * product.price;
+    }, 0)
+  );
+  const subMRPTotalAmount = Math.floor(
+    checkout?.checkoutItems?.reduce((acc, product) => {
+      return acc + product.quantity * product.mrp;
     }, 0)
   );
 
@@ -25,32 +35,18 @@ const OrderConfirmationPage = () => {
   const discount = Math.ceil(orderTotal - Math.floor(orderTotal / 100) * 100);
 
   const finalAmount = orderTotal - discount;
+
+   const savings =
+     subMRPTotalAmount + 120 + (3 / 10) * subMRPTotalAmount - finalAmount;
  
   //  clear the cart when order is confirmed
 useEffect(() => {
   const handleCheckout = async () => {
-    if (checkout && checkout._id) {
-      console.log(checkout);
-      console.log({
-        orderItems: checkout.checkoutItems,
-        shippingDetails: checkout.shippingDetails,
-        finalAmount:finalAmount,
-        isPaid: checkout.isPaid,
-        paidAt: checkout.paidAt,
-      });
-      
+    if (checkout && checkout._id) {     
 
       if ((user && user._id) || guestId) {
         await dispatch(clearCartFromBackend({ userId: user?._id, guestId }));
-        await dispatch(
-          createOrder({
-            orderItems: checkout.checkoutItems,
-            shippingDetails: checkout.shippingDetails,
-            totalPrice:finalAmount,
-            isPaid: checkout.isPaid,
-            paidAt: checkout.paidAt,
-          })
-        );
+        
       }
 
       dispatch(clearCart());
@@ -107,7 +103,7 @@ useEffect(() => {
                 <p className="font-bold">name</p>
                 <p>{user.name}</p>
               </div>
-              <div className="flex justify-between capitalize">
+              <div className="flex justify-between">
                 <p className="font-bold">email</p>
                 <p>{user.email}</p>
               </div>
@@ -121,8 +117,10 @@ useEffect(() => {
                   <p className="text-end">
                     {checkout.shippingDetails.address},
                   </p>
-                  <p className="text-end">{checkout.shippingDetails.city},</p>
-                  <p className="text-end">postal code: {checkout.shippingDetails.postalCode},</p>
+                  <p className="text-end"> {checkout.shippingDetails.city}, </p>
+                  <p className="text-end">
+                    postal code: {checkout.shippingDetails.postalCode},
+                  </p>
                   <p className="text-end">{checkout.shippingDetails.country}</p>
                 </div>
               </div>
@@ -130,7 +128,7 @@ useEffect(() => {
           </div>
 
           {/* track order button  */}
-          <button className="cursor-pointer text-white font-bold bg-orange-600 w-full mt-5 py-2 hover:bg-orange-500 transition-all duration-300 hover:scale-[1.02] active:scale-95 capitalize">
+          <button onClick={()=>navigate(`/order/${orderId}`)} className="cursor-pointer text-white font-bold bg-orange-600 w-full mt-5 py-2 hover:bg-orange-500 transition-all duration-300 hover:scale-[1.02] active:scale-95 capitalize">
             Track Your Order
           </button>
 
@@ -197,6 +195,7 @@ useEffect(() => {
                     <span className="select-none text-xs">
                       Quantity: {item.quantity}
                     </span>
+                    <span className="select-none text-xs">MRP: {item.mrp}</span>
                   </div>
                 </div>
                 {/* price & remove */}
@@ -213,22 +212,30 @@ useEffect(() => {
               <p>${subTotalAmount}</p>
             </div>
             <div className="flex w-full justify-between">
+              <p>total MRP</p>
+              <p>${subMRPTotalAmount}</p>
+            </div>
+            <div className="flex w-full justify-between">
               <p>shipping charges</p>
               <p>${shippingCharges}</p>
             </div>
             <div className="flex w-full justify-between">
-              <p>taxes</p>
+              <p>taxes (30%) </p>
               <p>${taxes}</p>
             </div>
             <div className="flex w-full justify-between font-bold mt-2 pt-2 border-t border-t-slate-400 text-sm">
               <p>order total</p>
               <p>${orderTotal}</p>
             </div>
-            <div className="flex w-full justify-between">
+            <div className="flex w-full justify-between text-amber-500 font-bold">
               <p>discount</p>
               <p>${discount}</p>
             </div>
-            <div className="flex w-full justify-between font-bold mt-2 pt-2 border-t border-t-slate-400 text-base">
+            <div className="flex w-full justify-between text-green-500 font-bold ">
+              <p>savings</p>
+              <p>${Math.ceil(savings)}</p>
+            </div>
+            <div className="flex w-full uppercase justify-between font-bold mt-2 pt-2 border-t border-t-slate-400 text-base">
               <p>final amount</p>
               <p>${finalAmount}</p>
             </div>

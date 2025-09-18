@@ -30,6 +30,10 @@ const checkoutItemSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    mrp: {
+        type: Number,
+        required: true,
+    }
     
 }, {_id: false});
 

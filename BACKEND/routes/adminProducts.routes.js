@@ -99,7 +99,7 @@ router.put("/:id", isLoggedin, isAdmin, async (req, res) => {
             sku,
             sizes,
             colors,
-            materials,
+            material,
             gender,
             images,
             isFeatured,
@@ -126,7 +126,7 @@ router.put("/:id", isLoggedin, isAdmin, async (req, res) => {
         product.sku = sku ?? product.sku;
         product.sizes = sizes ?? product.sizes;
         product.colors = colors ?? product.colors;
-        product.materials = materials ?? product.materials;
+        product.material = material ?? product.material;
         product.gender = gender ?? product.gender;
         product.images = images ?? product.images;
         product.isFeatured = typeof isFeatured === 'boolean' ? isFeatured : product.isFeatured;

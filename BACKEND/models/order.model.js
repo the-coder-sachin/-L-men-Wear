@@ -15,6 +15,10 @@ const orderItemSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    mrp:{
+        type: Number,
+        required: true
+    },
     price:{
         type: Number,
         required: true

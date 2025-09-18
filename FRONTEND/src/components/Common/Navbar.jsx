@@ -11,10 +11,10 @@ const Navbar = () => {
   const {user} = useSelector(state=>state.auth);
 
   return (
-    <nav className="bg-white px-2 mt-8 sm:px-5 flex justify-between sticky top-8 inset-x-0 z-[900] border-b border-b-slate-300/70 ">
+    <nav className="bg-white text-xs md:text-sm px-2 mt-8 sm:px-5 flex justify-between sticky top-8 inset-x-0 z-[900] border-b border-b-slate-300/70 ">
       {/* logo */}
       <Link to={"/"}>
-        <h1 onClick={()=>window.scrollTo({top:0, behavior:'smooth'})} className="sm:py-4 py-2 text-nowrap font-extrabold text-2xl cursor-pointer transition-all duration-300 hover:scale-105 active:scale-90">
+        <h1 onClick={()=>window.scrollTo({top:0, behavior:'smooth'})} className="sm:py-4 py-2 text-nowrap font-extrabold text-sm sm:text-2xl cursor-pointer transition-all duration-300 hover:scale-105 active:scale-90">
           Lumen Wear
         </h1>
       </Link>
@@ -46,7 +46,7 @@ const Navbar = () => {
         )}
         <Link
           to={"/profile"}
-          className="text-xl transition-all duration-300 active:scale-90 hover:scale-110 hover:text-black"
+          className="text-lg transition-all duration-300 active:scale-90 hover:scale-110 hover:text-black"
         >
           <CiUser />
         </Link>
