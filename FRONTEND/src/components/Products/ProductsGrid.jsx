@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../Common/LoadingSpinner";
+import ErrorMessage from "../Common/ErrorMessage";
 
-const ProductsGrid = ({products}) => {
+const ProductsGrid = ({products, loading, error}) => {
+  if(loading){
+    return <LoadingSpinner/>
+  }
+  if(error){
+    return <ErrorMessage/>
+  }
+
   return (
     <div className="flex justify-center">
       <div className="grid grid-cols-2 md:grid-cols-2 md:gap-10 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:p-12">

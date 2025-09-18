@@ -10,7 +10,6 @@ import axios from "axios";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { products, loading, error } = useSelector((state) => state.products);
   const [bestSellerProduct, setBestSellerProduct] = useState(null);
 
   useEffect(() => {

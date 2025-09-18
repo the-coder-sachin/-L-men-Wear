@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { IoReturnUpBack } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrderDetails } from "../redux/slices/orderSlice";
+import LoadingSpinner from "../components/Common/LoadingSpinner";
+import ErrorMessage from "../components/Common/ErrorMessage";
 
 const OrderDetailPages = () => {
   const { id } = useParams();
@@ -19,8 +21,8 @@ const OrderDetailPages = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (loading) return <p>loading.......</p>;
-  if (error) return <p>ERROR.......{error}</p>;
+  if (loading) return <LoadingSpinner/>;
+  if (error) return <ErrorMessage/>;
 
   return (
     <div className="p-5">

@@ -20,6 +20,7 @@ import AddProductPage from './components/Admin/AddProductPage'
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import ProtectedRoute from './components/Common/ProtectedRoute'
+import PageNotFound from './components/Common/PageNotFound'
 
 
 const App = () => {
@@ -60,6 +61,8 @@ const App = () => {
           <Route path="products/add" element={<AddProductPage />} />
           <Route path="orders" element={<OrdersManagement />} />
         </Route>
+        {/* 404 PAGE */}
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </Provider>
   );

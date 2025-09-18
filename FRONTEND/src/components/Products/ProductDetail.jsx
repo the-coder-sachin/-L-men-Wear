@@ -9,6 +9,7 @@ import {
 } from "../../redux/slices/productSlice";
 import { addToCart } from "../../redux/slices/cartSlice";
 import SimilarProducts from "./SimilarProducts";
+import LoadingSpinner from "../Common/LoadingSpinner";
 
 const ProductDetail = ({ productId }) => {
   const { id } = useParams();
@@ -90,7 +91,7 @@ const ProductDetail = ({ productId }) => {
 
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner/>;
   }
 
   if (error) {
@@ -115,7 +116,7 @@ const ProductDetail = ({ productId }) => {
                 onClick={() => setCurrentImg(img)}
                 src={img}
                 alt="product"
-                className="size-16 border border-slate-200 object-cover"
+                className="size-16 border border-slate-200 object-cover object-top"
               />
             ))}
           </div>
@@ -152,7 +153,7 @@ const ProductDetail = ({ productId }) => {
 
         {/* Details */}
         <div className="flex flex-col px-10 pt-10 gap-1 justify-center">
-          <h3 className="text-4xl font-extrabold mb-2">
+          <h3 className="text-4xl font-extrabold mb-2 capitalize">
             {selectedProduct.name}
           </h3>
           <p className="text-lg font-semibold">
