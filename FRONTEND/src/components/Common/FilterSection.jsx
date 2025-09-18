@@ -278,6 +278,49 @@ useEffect(() => {
         >
           clear all filters
         </button>
+        {/* price range  */}
+        <div className="mb-3">
+          <label className="block mb-3 text-slate-600">Price :</label>
+          <Range
+            label="Select your value"
+            step={50}
+            min={50}
+            max={50000}
+            values={priceRange}
+            onChange={(values) => togglePriceRange(values)}
+            renderTrack={({ props, children }) => (
+              <div
+                {...props}
+                style={{
+                  ...props.style,
+                  height: "6px",
+                  width: "100%",
+                  borderRadius: "10px",
+                  backgroundColor: "#ccc",
+                }}
+              >
+                {children}
+              </div>
+            )}
+            renderThumb={({ props }) => (
+              <div
+                {...props}
+                key={props.key}
+                style={{
+                  ...props.style,
+                  height: "12px",
+                  width: "12px",
+                  backgroundColor: "#000",
+                  borderRadius: "50%",
+                }}
+              />
+            )}
+          />
+          <div className="flex w-full justify-between items-center mt-5">
+            <span>${priceRange[0]}</span>
+            <span>${priceRange[1]}</span>
+          </div>
+        </div>
         {/* gender filter  */}
         <div className="mb-3">
           <label className="block mb-1 text-slate-600">Gender :</label>
@@ -380,50 +423,6 @@ useEffect(() => {
                 <span>{m}</span>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* price range  */}
-        <div className="mb-3">
-          <label className="block mb-3 text-slate-600">Price :</label>
-          <Range
-            label="Select your value"
-            step={50}
-            min={50}
-            max={50000}
-            values={priceRange}
-            onChange={(values) => togglePriceRange(values)}
-            renderTrack={({ props, children }) => (
-              <div
-                {...props}
-                style={{
-                  ...props.style,
-                  height: "6px",
-                  width: "100%",
-                  borderRadius: "10px",
-                  backgroundColor: "#ccc",
-                }}
-              >
-                {children}
-              </div>
-            )}
-            renderThumb={({ props }) => (
-              <div
-                {...props}
-                key={props.key}
-                style={{
-                  ...props.style,
-                  height: "12px",
-                  width: "12px",
-                  backgroundColor: "#000",
-                  borderRadius: "50%",
-                }}
-              />
-            )}
-          />
-          <div className="flex w-full justify-between items-center mt-5">
-            <span>${priceRange[0]}</span>
-            <span>${priceRange[1]}</span>
           </div>
         </div>
       </div>

@@ -12,6 +12,9 @@ const ProductsGrid = ({products, loading, error}) => {
 
   return (
     <div className="flex justify-center">
+      {products.length === 0 && (<div className="p-20">
+        <p className="animate-pulse text-xl">oops! no such product found...</p>
+      </div>)}
       <div className="grid grid-cols-2 md:grid-cols-2 md:gap-10 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:p-12">
         {products.map((product) => (
           // img
