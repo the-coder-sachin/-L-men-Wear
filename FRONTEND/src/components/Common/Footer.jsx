@@ -13,10 +13,10 @@ import { india } from "../../assets";
 
 const Footer = () => {
   return (
-    <footer className={`${ 0 && `pb-20 sm:pb-24`}`}>
+    <footer className={`${0 && `pb-20 sm:pb-24`}`}>
       {/* logo & country  */}
       <div className="flex justify-between px-2 sm:px-5 bg-gray-100 mb-5 sm:py-4 py-2">
-        <h1 className="text-2xl font-semibold">Lumen Wear</h1>
+        <h1 className="text-lg sm:text-2xl font-semibold">Lumen Wear</h1>
         <div className="flex gap-5 text-slate-700 text-sm">
           <div className="flex items-center">
             <FaGlobeAmericas />
@@ -144,9 +144,10 @@ const Footer = () => {
             Full Name and Address of the Manufacturer
           </p>
           <p className="leading-5 text-slate-500">
-            Louis Vuitton Malletier SAS <br /> 2 Rue du Pont Neuf <br /> 75034
-            Paris CEDEX 01 <br />
-            FRANCE
+            Lumen Wear (India) Pvt. Ltd. <br />
+            B-27, Sector 63 <br />
+            Noida, Uttar Pradesh - 201301 <br />
+            INDIA
           </p>
           <p className="text-slate-500">
             Please refer to the product label for specific country of origin for
@@ -159,8 +160,10 @@ const Footer = () => {
             Full Name and Address of the Importer
           </p>
           <p className="text-slate-500 leading-5">
-            Louis Vuitton India Retail Private Limited <br /> 901A Ninth Floor,
-            Time Tower, MG Road <br /> Gurgaon, Haryana - 122002 <br /> INDIA
+            Lumen Wear (India) Pvt. Ltd. <br />
+            B-27, Sector 63 <br />
+            Noida, Uttar Pradesh - 201301 <br />
+            INDIA
           </p>
           <p className="text-slate-500">
             Please refer to the product label for specific country of origin for
@@ -168,6 +171,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
+
       {/* social icons */}
       <div className="flex items-center justify-center gap-2 py-3 text-slate-600">
         <span className="text-[24px] hover:text-black hover:scale-[1.05] active:scale-[0.85] cursor-pointer transition duration-300">
@@ -199,8 +203,6 @@ const Footer = () => {
       <p className="bg-black text-white text-center text-xs py-2 ">
         © 2025 Lumen Wear. All Rights Reserved.
       </p>
-      
-
     </footer>
   );
 }

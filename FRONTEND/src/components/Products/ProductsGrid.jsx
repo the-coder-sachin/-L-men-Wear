@@ -12,9 +12,13 @@ const ProductsGrid = ({products, loading, error}) => {
 
   return (
     <div className="flex justify-center">
-      {products.length === 0 && (<div className="p-20">
-        <p className="animate-pulse text-xl">oops! no such product found...</p>
-      </div>)}
+      {products.length === 0 && (
+        <div className="p-20">
+          <p className="animate-pulse text-xl">
+            oops! no such product found...
+          </p>
+        </div>
+      )}
       <div className="grid grid-cols-2 md:grid-cols-2 md:gap-10 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:p-12">
         {products.map((product) => (
           // img
@@ -32,26 +36,29 @@ const ProductsGrid = ({products, loading, error}) => {
                 />
               </div>
               {/* details  */}
-              <div className="absolute text-xs sm:text-sm inset-x-0 bottom-0 backdrop-blur-[1.4px] bg-black/50 p-2 text-white">
-                <p className="font-semibold capitalize text-nowra">{`${product.name.slice(
+              <div className="absolute h-16 overflow-hidden text-xs inset-x-0 bottom-0 backdrop-blur-[1.4px] bg-black/50 p-2 text-white">
+                <p className="font-semibold capitalize">{`${product.name.slice(
                   0,
-                  80
+                  35
                 )} . ..`}</p>
-                <p className="font-semibold uppercase ">
-                  <span className="">exclusive offer: </span>
-                  <span className="text-base">${product.price}</span>
-                </p>
-                <div className="flex items-center justify-between">
-                  <p className="uppercase text-[10px]">
-                    regular price: <span>{product.mrp}</span>
+                <div className="fixed bottom-1">
+                  {" "}
+                  <p className="font-semibold uppercase ">
+                    <span className="">exclusive offer: </span>
+                    <span className="text-sm">${product.price}</span>
                   </p>
-                  <p className="animate-pulse uppercase border border-dashed px-1 flex justify-center items-center text-nowrap text-[10px] absolute bottom-1 right-1">
-                    {" "}
-                    {Math.ceil(
-                      ((product.mrp - product.price) / product.mrp) * 100
-                    )}
-                    % off
-                  </p>
+                  <div className="flex items-center justify-between">
+                    <p className="uppercase text-[10px]">
+                      regular price: <span>{product.mrp}</span>
+                    </p>
+                    <p className="animate-pulse uppercase border border-dashed px-1 flex justify-center items-center text-nowrap text-[10px] fixed bottom-1 right-1">
+                      {" "}
+                      {Math.ceil(
+                        ((product.mrp - product.price) / product.mrp) * 100
+                      )}
+                      % off
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
