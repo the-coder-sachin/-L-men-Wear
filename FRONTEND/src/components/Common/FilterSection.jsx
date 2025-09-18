@@ -169,6 +169,25 @@ const FilterSection = () => {
         });        
       };
 
+      const clearAllFilters=()=>{
+        setFilters({
+          gender: "",
+          color: [],
+          size: [],
+          material: [],
+          minPrice: 50,
+          maxPrice: 50000,
+        });
+        updateURLParams({
+          gender: "",
+          color: [],
+          size: [],
+          material: [],
+          minPrice: 50,
+          maxPrice: 50000,
+        });
+      }
+
      const clearAllSelectedColors= () =>{
       setSelectedColor([]);
       updateURLParams({
@@ -253,6 +272,12 @@ useEffect(() => {
     <>
       <div>
         <p className="font-semibold mb-3 text-xl">Filter</p>
+        <button
+          onClick={clearAllFilters}
+          className="text-red-600 text-end w-full cursor-pointer active:scale-90 transition-all duration-300"
+        >
+          clear all filters
+        </button>
         {/* gender filter  */}
         <div className="mb-3">
           <label className="block mb-1 text-slate-600">Gender :</label>
@@ -272,16 +297,16 @@ useEffect(() => {
 
         {/* color filter  */}
         <div className="mb-3">
-            <label className="block mb-1 text-slate-600">Color :</label>
-            <div className="flex justify-end -mt-3">
-              <button
-                onClick={clearAllSelectedColors}
-                className="flex items-center text-red-500 font-semibold cursor-pointer transition-all duration-300 active:scale-90"
-              >
-                <span>clear all</span>
-                <MdOutlineClear className="text-lg" />
-              </button>
-            </div>
+          <label className="block mb-1 text-slate-600">Color :</label>
+          <div className="flex justify-end -mt-3">
+            <button
+              onClick={clearAllSelectedColors}
+              className="flex items-center text-red-500 cursor-pointer transition-all duration-300 active:scale-90"
+            >
+              <span>clear all</span>
+              <MdOutlineClear className="text-lg" />
+            </button>
+          </div>
           <div className="flex flex-wrap gap-2">
             {color.map((c) => {
               const isSelected = filters.color.includes(c);
@@ -336,7 +361,7 @@ useEffect(() => {
           <div className="flex justify-end -mt-3">
             <button
               onClick={clearAllSelectedMaterials}
-              className="flex items-center text-red-500 font-semibold cursor-pointer transition-all duration-300 active:scale-90"
+              className="flex items-center text-red-500 cursor-pointer transition-all duration-300 active:scale-90"
             >
               <span>clear all</span>
               <MdOutlineClear className="text-lg" />

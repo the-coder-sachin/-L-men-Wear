@@ -16,7 +16,7 @@ const ProductsGrid = ({products}) => {
                 <img
                   src={product.images[0]}
                   alt="img"
-                  className="h-full w-full"
+                  className="h-full w-full object-cover object-top"
                 />
               </div>
               {/* details  */}

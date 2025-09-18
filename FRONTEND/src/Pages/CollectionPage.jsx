@@ -3,12 +3,12 @@ import FilterSection from "../components/Common/FilterSection";
 import { CiFilter } from "react-icons/ci";
 import ProductsGrid from "../components/Products/ProductsGrid";
 import SortOption from "../components/Common/SortOption";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsByFilters } from "../redux/slices/productSlice";
 
 const CollectionPage = () => {
-
+  const navigate = useNavigate();
   const {collection} = useParams();
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
@@ -84,7 +84,7 @@ useEffect(() => {
               <span>Filter</span>
             </button>
           )}
-           <p className={`${isSidebarOpen? "pl-[92.78px]": "pl-5"} mb-5`}>All collections</p> 
+           <p onClick={()=>navigate("/collection/all")} className={`${isSidebarOpen? "pl-[92.78px]": "pl-5"} mb-5 cursor-pointer`}>All collections</p> 
         </div>
 
           <div className="m-2 flex justify-end">

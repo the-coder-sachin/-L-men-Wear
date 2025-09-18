@@ -118,6 +118,11 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.error = null; // Clear error on success
     });
+    builder.addCase(registerUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+      state.error = null; // Clear error on success
+    });
     builder.addCase(registerUser.pending, (state) => {
       state.loading = true;
       state.error = null;
