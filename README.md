@@ -85,11 +85,11 @@
 ```bash
 Email: admin@user.com
 Password: 0000000
+```
 
-```md
 > ⚠️ **Note:** Demo user has limited permissions. Delete actions are disabled to protect data integrity.
 
----
+
 ## 🛠️ Getting Started
 
 Follow the steps below to set up and run the project locally:
@@ -123,5 +123,6 @@ cd ../frontend && npm run dev
 # 5. Build frontend for production (Vite)
 cd frontend
 npm run build
+```
 
 
