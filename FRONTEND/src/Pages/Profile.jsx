@@ -1,5 +1,5 @@
-import { purse1 } from '../assets';
-import { Link, useNavigate } from 'react-router-dom';
+
+import {  useNavigate } from 'react-router-dom';
 import { IoBagCheck } from "react-icons/io5";
 import { MdBlock } from "react-icons/md";
 import { MdOutlineRateReview } from "react-icons/md";
@@ -59,6 +59,7 @@ const Profile = () => {
     dispatch(logout());
     dispatch(clearCart());
     navigate("/login");
+    toast("logout successfull !!", {duration: 1000})
   };
 
   const handleUpdateProfile = () => {

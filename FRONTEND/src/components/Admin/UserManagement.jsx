@@ -8,6 +8,7 @@ import {
   fetchUsers,
   updateUser,
 } from "../../redux/slices/adminSlice";
+import { toast } from "sonner";
 
 const UserManagement = () => {
   const [formData, setFormData] = useState({
@@ -35,15 +36,16 @@ const UserManagement = () => {
     setFormData({ name: "", email: "", password: "", role: "customer" });
   };
 
-  const handleRoleChange = (user) => (e) => {
-    dispatch(
-      updateUser({ id: user._id, name: user.name, role: e.target.value })
-    );
-  };
+
+  // const handleDelete = (id) => {
+  //   if (confirm("Are you sure you want to delete this user?")) {
+  //     dispatch(deleteUser(id));
+  //   }
+  // };
 
   const handleDelete = (id) => {
     if (confirm("Are you sure you want to delete this user?")) {
-      dispatch(deleteUser(id));
+      toast("sorry this feature is not available for some secuirty reasons!", {duration: 2000})
     }
   };
 

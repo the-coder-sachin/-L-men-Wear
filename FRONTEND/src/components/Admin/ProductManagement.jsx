@@ -4,6 +4,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteProduct, fetchAdminProducts } from "../../redux/slices/adminProductSlice";
+import { toast } from "sonner";
 
 const ProductManagement = () => {
   
@@ -29,15 +30,20 @@ const ProductManagement = () => {
 
 const handleDelete = (e, productId) => {
   e.stopPropagation();
-
-  const confirmDelete = window.confirm(
-    "Are you sure you want to delete this product?"
-  );
-
-  if (confirmDelete) {
-    dispatch(deleteProduct(productId));
-  }
+  toast("this feature is disabled for secuirty reasons",{duration: 2000})
 };
+
+// const handleDelete = (e, productId) => {
+//   e.stopPropagation();
+
+//   const confirmDelete = window.confirm(
+//     "Are you sure you want to delete this product?"
+//   );
+
+//   if (confirmDelete) {
+//     dispatch(deleteProduct(productId));
+//   }
+// };
 
 
   return (

@@ -1,3 +1,4 @@
+import {toast} from "sonner"
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { google, login } from "../assets";
@@ -32,11 +33,22 @@ const Login = () => {
   },[user, guestId, cart, navigate, dispatch, isCheckoutRedirect])
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(loginUser({email, password}));
-    navigate("/");
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    // Wait for the asyncThunk to resolve, unwrap will throw if it's rejected
+    await dispatch(loginUser({ email, password })).unwrap();
+
+    // Navigate only if login is successful
+    toast("Login successfull !!", {duration: 1000});
+    navigate("/profile");
+  } catch (error) {
+    // Show toast error if login fails
+    toast.error(error?.message || "Login failed");
+  }
+};
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
